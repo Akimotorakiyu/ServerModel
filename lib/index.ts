@@ -35,6 +35,8 @@ class tsKoa extends Events {
         // 返回use以支持链式调用
         return this.use.bind(this)
     }
+
+    
 }
 
 export default tsKoa
