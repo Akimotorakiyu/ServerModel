@@ -13,7 +13,7 @@ class tsKoa extends Events {
         super()
     }
 
-    callback() {
+    private callback() {
         let entrance = this.compose();
 
         return async (req, res) => {
@@ -30,7 +30,7 @@ class tsKoa extends Events {
         }
     }
 
-    compose = function () {
+    private compose = function () {
         let middleware = this.middleware;
         return function (ctx: any) {
             let index = 0;
@@ -42,9 +42,9 @@ class tsKoa extends Events {
         }
     }
 
-    server: http.Server;
+    private server: http.Server;
 
-    middleware: Middleware[] = [];
+    private middleware: Middleware[] = [];
 
     listen(...args) {
         this.server = http.createServer(this.callback())
