@@ -1,3 +1,3 @@
 # tsKoa 
 
-typescript version of koa
+Typescript version of Koa, for education。
