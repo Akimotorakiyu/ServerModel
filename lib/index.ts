@@ -1,13 +1,13 @@
 import * as  http from "http";
 import * as  Events from "events";
-
+import compose from "./tools/compose"
 interface Context {
     req: http.IncomingMessage,
     res: http.ServerResponse,
     app: tsKoa
 }
 
-type Middleware = (ctx: Context) => void
+type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 
 class tsKoa extends Events {
     constructor(parameters: { port: string }) {
@@ -15,8 +15,23 @@ class tsKoa extends Events {
     }
 
     callback() {
-        return (req, res) => {
-            res.end("hello world!")
+        let entrance = compose(this.middleware);
+
+        return async (req, res) => {
+            try {
+                let ctx = {
+                    req,
+                    res,
+                    app: this
+                }
+
+                entrance(ctx);
+            } catch (error) {
+
+                console.error(error)
+
+            }
+            // res.end("hello world!")
         }
     }
 
@@ -30,13 +45,11 @@ class tsKoa extends Events {
         return this.server.listen(...args)
     }
 
-    use(fn: (ctx: Middleware) => void) {
-        this.middleware.push()
+    use(fn: Middleware) {
+        this.middleware.push(fn)
         // 返回use以支持链式调用
         return this.use.bind(this)
     }
-
-    
 }
 
 export default tsKoa
