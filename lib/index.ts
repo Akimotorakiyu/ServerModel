@@ -1,6 +1,5 @@
 import * as  http from "http";
 import * as  Events from "events";
-import compose from "./tools/compose"
 interface Context {
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -15,7 +14,7 @@ class tsKoa extends Events {
     }
 
     callback() {
-        let entrance = compose(this.middleware);
+        let entrance = this.compose();
 
         return async (req, res) => {
             try {
@@ -28,6 +27,18 @@ class tsKoa extends Events {
             } catch (error) {
                 console.error(error)
             }
+        }
+    }
+
+    compose = function () {
+        let middleware = this.middleware;
+        return function (ctx: any) {
+            let index = 0;
+            async function theNext(deep: number) {
+                let fn = middleware[deep];
+                fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
+            }
+            return theNext(index);
         }
     }
 
