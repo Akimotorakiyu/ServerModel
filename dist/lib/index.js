@@ -36,7 +36,8 @@
                         res,
                         app: this
                     };
-                    entrance(ctx);
+                    await entrance(ctx);
+                    res.end();
                 }
                 catch (error) {
                     console.error(error);

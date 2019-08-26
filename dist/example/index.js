@@ -18,7 +18,14 @@
     });
     app.use(async (ctx, next) => {
         console.log("get into 2");
-        ctx.res.end("hello world! 2");
+        ctx.res.write("hello world! 2");
+        return;
+        next();
+    });
+    app.use(async (ctx, next) => {
+        console.log("get into 3");
+        ctx.res.write("hello world! 3");
+        next();
     });
     app.listen("666", () => {
         console.log("tsKoa serveing...");
