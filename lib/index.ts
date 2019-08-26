@@ -24,14 +24,10 @@ class tsKoa extends Events {
                     res,
                     app: this
                 }
-
                 entrance(ctx);
             } catch (error) {
-
                 console.error(error)
-
             }
-            // res.end("hello world!")
         }
     }
 
@@ -41,13 +37,11 @@ class tsKoa extends Events {
 
     listen(...args) {
         this.server = http.createServer(this.callback())
-        // 返回server以支持链式调用
         return this.server.listen(...args)
     }
 
     use(fn: Middleware) {
         this.middleware.push(fn)
-        // 返回use以支持链式调用
         return this.use.bind(this)
     }
 }
