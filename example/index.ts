@@ -14,8 +14,6 @@ app.use(async (ctx, next) => {
     ctx.res.end("hello world! 2")
 })
 
-console.log(app.middleware)
-
 app.listen("666", () => {
     console.log("tsKoa serveing...")
 })
