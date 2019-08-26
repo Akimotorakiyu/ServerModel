@@ -14,7 +14,7 @@ class tsKoa extends Events {
     }
 
     private callback() {
-        let entrance = this.compose();
+        let entrance = this.onionRings();
 
         return async (req, res) => {
             try {
@@ -30,7 +30,7 @@ class tsKoa extends Events {
         }
     }
 
-    private compose = function () {
+    private onionRings = function () {
         let middleware = this.middleware;
         return function (ctx: any) {
             let index = 0;

@@ -12,7 +12,7 @@ declare class tsKoa extends Events {
         port: string;
     });
     private callback;
-    private compose;
+    private onionRings;
     private server;
     private middleware;
     listen(...args: any[]): http.Server;
