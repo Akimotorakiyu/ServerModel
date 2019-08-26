@@ -4,6 +4,8 @@
         "moduleResolution": "node",
         "lib": ["es2017"],
         "sourceMap": true,
-        "declaration": true
+        "declaration": true,
+        "outDir": "dist",
+        "module": "umd"
     }
 }
