@@ -26,9 +26,10 @@ class tsKoa extends Events {
                     app: this
                 }
                 await entrance(ctx);
-                res.end();
             } catch (error) {
                 console.error(error)
+            } finally {
+                res.end();
             }
         }
     }
