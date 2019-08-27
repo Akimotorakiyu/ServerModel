@@ -3,7 +3,7 @@
 Typescript version of Koa, for education。
 
 
-### how to use
+### how to play
 
 dev
 ```bash
