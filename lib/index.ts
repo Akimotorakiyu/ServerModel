@@ -1,5 +1,6 @@
 import * as  http from "http";
 import * as  Events from "events";
+
 interface Context {
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -9,7 +10,8 @@ interface Context {
 type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 
 class tsKoa extends Events {
-    constructor(parameters: { port: string }) {
+
+    constructor(options?: any) {
         super()
     }
 
@@ -33,23 +35,23 @@ class tsKoa extends Events {
 
     private onionRings = function () {
         let middleware = this.middleware;
-        return function (ctx: any) {
+
+        return (ctx: any) => {
             let index = 0;
+            
             async function theNext(deep: number) {
                 let fn = middleware[deep];
                 fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
             }
+
             return theNext(index);
         }
     }
 
-    private server: http.Server;
-
     private middleware: Middleware[] = [];
 
     listen(...args) {
-        this.server = http.createServer(this.callback())
-        return this.server.listen(...args)
+        return http.createServer(this.callback()).listen(...args)
     }
 
     use(fn: Middleware) {
