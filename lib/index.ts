@@ -36,7 +36,7 @@ class tsKoa extends Events {
     private onionRings = function () {
         let middleware = this.middleware;
 
-        return (ctx: any) => {
+        return (ctx: Context) => {
             let index = 0;
             
             async function theNext(deep: number) {
