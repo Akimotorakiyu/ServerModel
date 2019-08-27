@@ -12,8 +12,6 @@ app.use(async (ctx, next) => {
 app.use(async (ctx, next) => {
     console.log("get into 2")
     ctx.res.write("hello world! 2")
-    
-    return 
     next()
 })
 
