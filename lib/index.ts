@@ -18,7 +18,7 @@ class tsKoa extends Events {
     private callback() {
         let entrance = this.onionRings();
 
-        return async (req, res) => {
+        return async (req: http.IncomingMessage, res: http.ServerResponse) => {
             try {
                 let ctx = {
                     req,
@@ -34,12 +34,12 @@ class tsKoa extends Events {
         }
     }
 
-    private onionRings = function () {
+    private onionRings() {
         let middleware = this.middleware;
 
         return (ctx: Context) => {
             let index = 0;
-            
+
             async function theNext(deep: number) {
                 let fn = middleware[deep];
                 fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
