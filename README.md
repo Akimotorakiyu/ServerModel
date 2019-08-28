@@ -9,7 +9,11 @@ dev
 ```bash
 npm run dev
 # OR
+npm run serve
+# OR
 yarn dev
+# OR
+yarn serve
 ```
 
 build

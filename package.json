@@ -1,5 +1,5 @@
 {
-  "name": "TSKoa",
+  "name": "minitskoa",
   "version": "1.0.0",
   "main": "./dist/lib/index.js",
   "typings": "./dist/lib/index.d.ts",
