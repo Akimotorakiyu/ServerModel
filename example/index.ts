@@ -15,11 +15,11 @@ app.use(async (ctx, next) => {
     next()
 })
 
-app.listen("666", () => {
+app.createServer().listen("666", () => {
     console.log("tsKoa serveing...")
 })
 
-app.listen("777", () => {
+app.createServer().listen("777", () => {
     console.log("tsKoa serveing...")
 })
 

@@ -51,8 +51,8 @@ class tsKoa extends Events {
 
     private middleware: Middleware[] = [];
 
-    listen(...args) {
-        return http.createServer(this.callback()).listen(...args)
+    createServer() {
+        return http.createServer(this.callback())
     }
 
     use(fn: Middleware) {
