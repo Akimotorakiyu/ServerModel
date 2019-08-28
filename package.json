@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsnd ./example/index.ts",
+    "serve": "tsnd ./example/index.ts",
     "build": "tsc"
   },
   "dependencies": {},
