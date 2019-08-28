@@ -10,7 +10,7 @@
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const index_1 = require("../lib/index");
-    const app = new index_1.default({ port: "8080" });
+    const app = new index_1.default();
     app.use(async (ctx, next) => {
         console.log("get into 1");
         ctx.res.write("hello world! 1");
@@ -19,16 +19,25 @@
     app.use(async (ctx, next) => {
         console.log("get into 2");
         ctx.res.write("hello world! 2");
-        return;
         next();
+    });
+    app.createServer().listen("666", () => {
+        console.log("tsKoa serveing...");
+    });
+    app.createServer().listen("777", () => {
+        console.log("tsKoa serveing...");
     });
     app.use(async (ctx, next) => {
         console.log("get into 3");
         ctx.res.write("hello world! 3");
         next();
     });
-    app.listen("666", () => {
-        console.log("tsKoa serveing...");
-    });
+    setTimeout(() => {
+        app.use(async (ctx, next) => {
+            console.log("get into 4");
+            ctx.res.write("hello world! 4");
+            next();
+        });
+    }, 3000);
 });
 //# sourceMappingURL=index.js.map

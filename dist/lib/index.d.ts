@@ -8,14 +8,11 @@ interface Context {
 }
 declare type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 declare class tsKoa extends Events {
-    constructor(parameters: {
-        port: string;
-    });
+    constructor(options?: any);
     private callback;
     private onionRings;
-    private server;
     private middleware;
-    listen(...args: any[]): http.Server;
+    createServer(): http.Server;
     use(fn: Middleware): any;
 }
 export default tsKoa;

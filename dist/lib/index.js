@@ -12,19 +12,8 @@
     const http = require("http");
     const Events = require("events");
     class tsKoa extends Events {
-        constructor(parameters) {
+        constructor(options) {
             super();
-            this.onionRings = function () {
-                let middleware = this.middleware;
-                return function (ctx) {
-                    let index = 0;
-                    async function theNext(deep) {
-                        let fn = middleware[deep];
-                        fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
-                    }
-                    return theNext(index);
-                };
-            };
             this.middleware = [];
         }
         callback() {
@@ -37,16 +26,28 @@
                         app: this
                     };
                     await entrance(ctx);
-                    res.end();
                 }
                 catch (error) {
                     console.error(error);
                 }
+                finally {
+                    res.end();
+                }
             };
         }
-        listen(...args) {
-            this.server = http.createServer(this.callback());
-            return this.server.listen(...args);
+        onionRings() {
+            let middleware = this.middleware;
+            return (ctx) => {
+                let index = 0;
+                async function theNext(deep) {
+                    let fn = middleware[deep];
+                    fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
+                }
+                return theNext(index);
+            };
+        }
+        createServer() {
+            return http.createServer(this.callback());
         }
         use(fn) {
             this.middleware.push(fn);
