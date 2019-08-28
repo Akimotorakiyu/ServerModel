@@ -1,6 +1,6 @@
 # TSKoa-Edu
 
-Typescript version of Koa, for education。
+A mini typescript version of Koa, for education。
 
 
 ### how to play
