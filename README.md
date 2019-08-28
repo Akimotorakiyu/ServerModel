@@ -5,18 +5,24 @@ Typescript version of Koa, for education。
 
 ### how to play
 
-dev
+#### serve
 ```bash
-npm run dev
 # OR
 npm run serve
-# OR
-yarn dev
 # OR
 yarn serve
 ```
 
-build
+#### debug
+1. dev
+```bash
+npm run dev
+# OR
+yarn dev
+```
+2. **vscode**: switch to debug tab, then click `debug button`
+
+#### build
 ```bash
 npm run build
 # OR

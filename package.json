@@ -6,7 +6,7 @@
   "author": "SilverLeaves <autumnsilverleaves@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd ./example/index.ts",
+    "dev": "tsnd --inspect -- ./example/index.ts",
     "serve": "tsnd ./example/index.ts",
     "build": "tsc"
   },
