@@ -15,8 +15,12 @@ class tsKoa extends Events {
         super()
     }
 
+    createServer() {
+        return http.createServer(this.callback())
+    }
+
     private callback() {
-        let entrance = this.onionRings();
+        const entrance = this.onionRings();
 
         return async (req: http.IncomingMessage, res: http.ServerResponse) => {
             try {
@@ -34,30 +38,26 @@ class tsKoa extends Events {
         }
     }
 
+    private middleware: Middleware[] = [];
+
+    use(fn: Middleware) {
+        this.middleware.push(fn)
+        return this.use.bind(this)
+    }
+
     private onionRings() {
-        let middleware = this.middleware;
+        const middleware = this.middleware;
 
         return (ctx: Context) => {
             let index = 0;
 
             async function theNext(deep: number) {
-                let fn = middleware[deep];
+                const fn = middleware[deep];
                 fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
             }
 
             return theNext(index);
         }
-    }
-
-    private middleware: Middleware[] = [];
-
-    createServer() {
-        return http.createServer(this.callback())
-    }
-
-    use(fn: Middleware) {
-        this.middleware.push(fn)
-        return this.use.bind(this)
     }
 }
 
