@@ -1,7 +1,8 @@
 {
   "name": "TSKoa",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/lib/index.js",
+  "typings": "./dist/lib/index.d.ts",
   "author": "SilverLeaves <autumnsilverleaves@gmail.com>",
   "license": "MIT",
   "scripts": {
