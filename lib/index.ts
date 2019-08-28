@@ -34,10 +34,6 @@ class tsKoa extends Events {
         })
     }
 
-    private callback() {
-        return
-    }
-
     private middleware: Middleware[] = [];
 
     use(fn: Middleware) {
