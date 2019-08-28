@@ -16,13 +16,9 @@ class tsKoa extends Events {
     }
 
     createServer() {
-        return http.createServer(this.callback())
-    }
-
-    private callback() {
         const entrance = this.onionRings();
 
-        return async (req: http.IncomingMessage, res: http.ServerResponse) => {
+        return http.createServer(async (req: http.IncomingMessage, res: http.ServerResponse) => {
             try {
                 let ctx = {
                     req,
@@ -35,7 +31,11 @@ class tsKoa extends Events {
             } finally {
                 res.end();
             }
-        }
+        })
+    }
+
+    private callback() {
+        return
     }
 
     private middleware: Middleware[] = [];
