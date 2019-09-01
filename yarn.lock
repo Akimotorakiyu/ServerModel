@@ -4,7 +4,7 @@
 
 "@types/node@^12.7.2":
   version "12.7.2"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.2.tgz?cache=0&sync_timestamp=1566325318079&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
   integrity sha1-xOY69eiCPOnMPws097mYwhcfDEQ=
 
 "@types/strip-bom@^3.0.0":
@@ -517,7 +517,7 @@ ts-node-dev@^1.0.0-pre.42:
 
 ts-node@*, ts-node@^8.3.0:
   version "8.3.0"
-  resolved "https://registry.npm.taobao.org/ts-node/download/ts-node-8.3.0.tgz#e4059618411371924a1fb5f3b125915f324efb57"
+  resolved "https://registry.npm.taobao.org/ts-node/download/ts-node-8.3.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fts-node%2Fdownload%2Fts-node-8.3.0.tgz#e4059618411371924a1fb5f3b125915f324efb57"
   integrity sha1-5AWWGEETcZJKH7XzsSWRXzJO+1c=
   dependencies:
     arg "^4.1.0"
@@ -537,9 +537,9 @@ tsconfig@^7.0.0:
     strip-json-comments "^2.0.0"
 
 typescript@^3.5.3:
-  version "3.5.3"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
-  integrity sha1-yDD2V/k/HqhGgZ6SkJL1/lmD6Xc=
+  version "3.6.2"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.6.2.tgz?cache=0&sync_timestamp=1567059470955&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.6.2.tgz#105b0f1934119dde543ac8eb71af3a91009efe54"
+  integrity sha1-EFsPGTQRnd5UOsjrca86kQCe/lQ=
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
