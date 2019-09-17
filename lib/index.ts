@@ -49,7 +49,7 @@ class tsKoa extends Events {
 
             async function theNext(deep: number) {
                 const fn = middleware[deep];
-                fn ? await fn(ctx, theNext.bind(null, ++index)) : "";
+                if (fn) await fn(ctx, theNext.bind(null, ++index));
             }
 
             return theNext(index);
