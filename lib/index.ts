@@ -12,7 +12,7 @@ type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 class tsKoa extends Events {
 
     constructor(options?: any) {
-        super()
+        super();
     }
 
     createServer() {
@@ -24,10 +24,10 @@ class tsKoa extends Events {
                     req,
                     res,
                     app: this
-                }
+                };
                 await entrance(ctx);
             } catch (error) {
-                console.error(error)
+                console.error(error);
             } finally {
                 res.end();
             }
@@ -37,8 +37,8 @@ class tsKoa extends Events {
     private middleware: Middleware[] = [];
 
     use(fn: Middleware) {
-        this.middleware.push(fn)
-        return this.use.bind(this)
+        this.middleware.push(fn);
+        return this;
     }
 
     private onionRings() {
