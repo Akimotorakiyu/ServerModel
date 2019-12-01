@@ -14,6 +14,6 @@ app.use(async (ctx, next) => {
   next();
 });
 
-app.createServer().listen("666", () => {
+app.createServer().listen("9000", () => {
   console.log("tsKoa serveing...");
 });
