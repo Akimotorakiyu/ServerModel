@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "tsnd --inspect -- ./example/index.ts",
     "serve": "tsnd ./example/index.ts",
+    "start": "tsnd ./example/index.ts",
     "build": "tsc"
   },
   "dependencies": {},
