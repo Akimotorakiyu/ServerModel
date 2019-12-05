@@ -11,7 +11,10 @@
     "start": "ts-node ./example/index.ts",
     "build": "tsc"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/socket.io": "^2.1.4",
+    "socket.io": "^2.3.0"
+  },
   "devDependencies": {
     "@types/node": "^12.7.2",
     "ts-node": "^8.3.0",

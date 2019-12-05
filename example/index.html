@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <style>
+      .left {
+        text-align: left;
+      }
+
+      .right {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <template v-for="(msg,index) in chat">
+          <li v-if="msg.name!==name" :key="index+''" class="msg left">
+            {{`${msg.name}: ${msg.msg }`}}
+          </li>
+          <li v-else :key="index+''" class="msg right">{{`${msg.msg }`}}</li>
+        </template>
+      </ul>
+      name:<input v-model="name" @keyup.enter="$refs.msgbox.focus(),msg=''" />
+      <br />
+      msg:<input
+        ref="msgbox"
+        v-model="msg"
+        @keyup.enter="send"
+        placeholder="请输入消息，按回车发送"
+        style="width: 300px;"
+      />
+    </div>
+    <script src="http://127.0.0.1:9000/socket.io/socket.io.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            msg: "",
+            name: `id.${Date.now()}`,
+            chat: [],
+            socket: io("http://127.0.0.1:9000")
+          };
+        },
+        methods: {
+          send(data) {
+            let message = { name: this.name, msg: this.msg };
+            this.socket.emit("broadcast", message);
+            this.socket.send(message);
+            this.msg = "";
+          }
+        },
+        mounted() {
+          this.socket.on("message", data => {
+            this.chat.push(data);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
