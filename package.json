@@ -12,8 +12,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@types/socket.io": "^2.1.4",
-    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^12.7.2",
