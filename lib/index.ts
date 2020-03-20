@@ -21,7 +21,7 @@ export default class tsKoa extends Events {
     return this;
   }
 
-  entrance = onionRings(this.middleware);
+  private entrance = onionRings(this.middleware);
 
   callback = async (req: http.IncomingMessage, res: http.ServerResponse) => {
     console.log(this);
