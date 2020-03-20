@@ -1,5 +1,16 @@
-import tsKoa from "../lib/index";
-const app = new tsKoa();
+import TsKoa, { Context } from "../lib/index";
+import Router from "../lib/router";
+
+const app = new TsKoa();
+
+const router = new Router();
+
+async function admin(ctx: Context, next: () => Promise<void>) {
+  console.log("login")
+  ctx.res.write("login success");
+}
+
+router.use("get", "login", [admin]);
 
 import * as IO from "socket.io";
 
@@ -13,13 +24,15 @@ app.use(async (ctx, next) => {
   next();
 });
 
+app.use(router.routes)
+
 app.use(async (ctx, next) => {
   ctx.res.write("hello world! 2");
 
   next();
 });
 
-console.log(app);
+app.use(router.routes)
 
 const server = app.createServer();
 

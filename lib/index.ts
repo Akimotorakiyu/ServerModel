@@ -10,9 +10,6 @@ export interface Context {
 export type Middleware = (ctx: Context, next: () => Promise<void>) => Promise<void>;
 
 export default class tsKoa extends Events {
-  constructor(options?: any) {
-    super();
-  }
 
   private middleware: Middleware[] = [];
 

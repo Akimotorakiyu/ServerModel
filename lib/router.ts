@@ -11,22 +11,23 @@ export default class Router {
     Map<string, (ctx: Context) => Promise<void>>
   >();
 
-  constructor(parameters) {}
-
   routes: Middleware = async (ctx, next) => {
-    const urlInfo = new URL(ctx.req.url);
+    const urlInfo = new URL("https://www.localhost.com" + ctx.req.url);
 
     const pathnameArray = urlInfo.pathname.split("/");
-    if (!this.routesMap.has(ctx.req.method as Method)) {
-      const methodRoutesMap = this.routesMap.get(ctx.req.method as Method);
-
-      if (methodRoutesMap.has(pathnameArray[0])) {
-        const entrance = methodRoutesMap.get(pathnameArray[0]);
-
+    console.log(urlInfo.pathname, pathnameArray);
+    if (this.routesMap.has(ctx.req.method.toLowerCase() as Method)) {
+      console.log(this.routesMap);
+      const methodRoutesMap = this.routesMap.get(
+        ctx.req.method.toLowerCase() as Method
+      );
+      console.log(ctx.req.method, methodRoutesMap);
+      if (methodRoutesMap && methodRoutesMap.has(pathnameArray[1])) {
+        const entrance = methodRoutesMap.get(pathnameArray[1]);
         await entrance(ctx);
-        await next();
       }
     }
+    await next();
   };
 
   use(method: Method, pathSnipt: string, routes: Middleware[]) {
