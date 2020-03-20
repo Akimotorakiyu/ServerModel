@@ -1,14 +1,18 @@
-type Middleware<T> = (ctx: T, next: () => void) => Promise<void>;
+type Middleware<T> = (ctx: T, next: () => Promise<void>) => Promise<void>;
 
 export default function onionRings<T>(middleware: Middleware<T>[]) {
+  async function theNext(ref: { ctx: T; index: number }) {
+    const fn = middleware[ref.index++];
+    if (fn)
+      await fn(ref.ctx, () => {
+        return theNext(ref);
+      });
+  }
+
   return (ctx: T) => {
-    let index = 0;
-
-    async function theNext() {
-      const fn = middleware[index++];
-      if (fn) await fn(ctx, theNext);
-    }
-
-    return theNext();
+    return theNext({
+      ctx,
+      index: 0
+    });
   };
 }

@@ -7,7 +7,7 @@ interface Context {
   app: tsKoa;
 }
 
-export type Middleware = (ctx: Context, next: () => void) => Promise<void>;
+export type Middleware = (ctx: Context, next: () => Promise<void>) => Promise<void>;
 
 export default class tsKoa extends Events {
   constructor(options?: any) {
