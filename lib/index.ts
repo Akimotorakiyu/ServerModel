@@ -9,30 +9,9 @@ interface Context {
 
 type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 
-class tsKoa extends Events {
+export default class tsKoa extends Events {
   constructor(options?: any) {
     super();
-  }
-
-  createServer() {
-    const entrance = onionRings(this.middleware);
-
-    return http.createServer(
-      async (req: http.IncomingMessage, res: http.ServerResponse) => {
-        try {
-          let ctx = {
-            req,
-            res,
-            app: this
-          };
-          await entrance(ctx);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          res.end();
-        }
-      }
-    );
   }
 
   private middleware: Middleware[] = [];
@@ -41,6 +20,26 @@ class tsKoa extends Events {
     this.middleware.push(fn);
     return this;
   }
-}
 
-export default tsKoa;
+  entrance = onionRings(this.middleware);
+
+  callback = async (req: http.IncomingMessage, res: http.ServerResponse) => {
+    console.log(this);
+    try {
+      let ctx = {
+        req,
+        res,
+        app: this
+      };
+      await this.entrance(ctx);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      res.end();
+    }
+  };
+
+  createServer() {
+    return http.createServer(this.callback);
+  }
+}

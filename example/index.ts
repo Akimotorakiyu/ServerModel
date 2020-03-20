@@ -19,6 +19,8 @@ app.use(async (ctx, next) => {
   next();
 });
 
+console.log(app)
+
 const server = app.createServer();
 
 const io = IO(server);
