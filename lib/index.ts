@@ -7,7 +7,7 @@ interface Context {
   app: tsKoa;
 }
 
-type Middleware = (ctx: Context, next: () => void) => Promise<void>;
+export type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 
 export default class tsKoa extends Events {
   constructor(options?: any) {
@@ -24,7 +24,6 @@ export default class tsKoa extends Events {
   private entrance = onionRings(this.middleware);
 
   callback = async (req: http.IncomingMessage, res: http.ServerResponse) => {
-    console.log(this);
     try {
       let ctx = {
         req,

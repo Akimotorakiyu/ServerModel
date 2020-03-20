@@ -4,11 +4,11 @@ export default function onionRings<T>(middleware: Middleware<T>[]) {
   return (ctx: T) => {
     let index = 0;
 
-    async function theNext(deep: number) {
-      const fn = middleware[deep];
-      if (fn) await fn(ctx, theNext.bind(null, ++index));
+    async function theNext() {
+      const fn = middleware[index++];
+      if (fn) await fn(ctx, theNext);
     }
 
-    return theNext(index);
+    return theNext();
   };
 }

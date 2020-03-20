@@ -5,7 +5,7 @@ import * as IO from "socket.io";
 
 app.use(async (ctx, next) => {
   ctx.res.setHeader("Access-Control-Allow-Origin", "*");
-
+  console.log(ctx.req.url);
   ctx.res.write("hello world! 1");
   ctx.req.on("data", data => {
     console.log(data);
@@ -19,7 +19,7 @@ app.use(async (ctx, next) => {
   next();
 });
 
-console.log(app)
+console.log(app);
 
 const server = app.createServer();
 
