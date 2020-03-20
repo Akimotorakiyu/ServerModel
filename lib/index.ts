@@ -1,60 +1,46 @@
-import * as  http from "http";
-import * as  Events from "events";
-
+import * as http from "http";
+import * as Events from "events";
+import onionRings from "./onionRings";
 interface Context {
-    req: http.IncomingMessage,
-    res: http.ServerResponse,
-    app: tsKoa
+  req: http.IncomingMessage;
+  res: http.ServerResponse;
+  app: tsKoa;
 }
 
 type Middleware = (ctx: Context, next: () => void) => Promise<void>;
 
 class tsKoa extends Events {
+  constructor(options?: any) {
+    super();
+  }
 
-    constructor(options?: any) {
-        super();
-    }
+  createServer() {
+    const entrance = onionRings(this.middleware);
 
-    createServer() {
-        const entrance = this.onionRings();
-
-        return http.createServer(async (req: http.IncomingMessage, res: http.ServerResponse) => {
-            try {
-                let ctx = {
-                    req,
-                    res,
-                    app: this
-                };
-                await entrance(ctx);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                res.end();
-            }
-        })
-    }
-
-    private middleware: Middleware[] = [];
-
-    use(fn: Middleware) {
-        this.middleware.push(fn);
-        return this;
-    }
-
-    private onionRings() {
-        const middleware = this.middleware;
-
-        return (ctx: Context) => {
-            let index = 0;
-
-            async function theNext(deep: number) {
-                const fn = middleware[deep];
-                if (fn) await fn(ctx, theNext.bind(null, ++index));
-            }
-
-            return theNext(index);
+    return http.createServer(
+      async (req: http.IncomingMessage, res: http.ServerResponse) => {
+        try {
+          let ctx = {
+            req,
+            res,
+            app: this
+          };
+          await entrance(ctx);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          res.end();
         }
-    }
+      }
+    );
+  }
+
+  private middleware: Middleware[] = [];
+
+  use(fn: Middleware) {
+    this.middleware.push(fn);
+    return this;
+  }
 }
 
-export default tsKoa
+export default tsKoa;

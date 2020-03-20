@@ -4,11 +4,18 @@ const app = new tsKoa();
 import * as IO from "socket.io";
 
 app.use(async (ctx, next) => {
+  ctx.res.setHeader("Access-Control-Allow-Origin", "*");
+
   ctx.res.write("hello world! 1");
   ctx.req.on("data", data => {
     console.log(data);
   });
-  ctx.res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
+app.use(async (ctx, next) => {
+  ctx.res.write("hello world! 2");
+
   next();
 });
 
