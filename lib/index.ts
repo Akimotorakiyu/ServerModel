@@ -1,7 +1,7 @@
 import * as http from "http";
 import * as Events from "events";
 import onionRings from "./onionRings";
-interface Context {
+export interface Context {
   req: http.IncomingMessage;
   res: http.ServerResponse;
   app: tsKoa;
