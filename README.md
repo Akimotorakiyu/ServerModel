@@ -1,30 +1,11 @@
-# TSKoa-Edu
+# ServerModel
 
-A mini typescript version of Koa, for education。
+A mini ServerModel. extend it for real server, inspiration by Koa.
 
+## status:Alpha
 
-### how to play
+refactor router...
 
-#### serve
-```bash
-# OR
-npm run serve
-# OR
-yarn serve
-```
-
-#### debug
-1. dev
-```bash
-npm run dev
-# OR
-yarn dev
-```
-2. **vscode**: switch to debug tab, then click `debug button`
-
-#### build
-```bash
-npm run build
-# OR
-yarn build
-```
+- [x] ServerModel
+- [x] onionRings
+- [ ] RouterModel
