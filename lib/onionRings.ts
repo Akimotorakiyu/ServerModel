@@ -1,4 +1,7 @@
-type Middleware<T> = (ctx: T, next: () => Promise<void>) => Promise<void>;
+export type Middleware<T> = (
+  ctx: T,
+  next: () => Promise<void>
+) => Promise<void>;
 
 async function theNext<T>(ref: {
   ctx: T;

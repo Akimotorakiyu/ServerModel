@@ -1,5 +1,5 @@
-import TsKoa, { Context } from "../lib/index";
-import Router from "../lib/router";
+import TsKoa, { Context } from "../koa";
+import {Router} from "../lib";
 
 const app = new TsKoa();
 

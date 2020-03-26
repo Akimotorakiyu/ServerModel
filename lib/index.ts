@@ -1,41 +1,5 @@
-import * as http from "http";
-import * as Events from "events";
-import onionRings from "./onionRings";
-export interface Context {
-  req: http.IncomingMessage;
-  res: http.ServerResponse;
-  app: tsKoa;
-}
+import ServerModel, { ServerModelContext } from "./ServerModel";
+import Router, { BaseContext } from "./router";
+import onionRings, { Middleware } from "./onionRings";
 
-export type Middleware = (ctx: Context, next: () => Promise<void>) => Promise<void>;
-
-export default class tsKoa extends Events {
-
-  private middleware: Middleware[] = [];
-
-  use(fn: Middleware) {
-    this.middleware.push(fn);
-    return this;
-  }
-
-  private entrance = onionRings(this.middleware);
-
-  callback = async (req: http.IncomingMessage, res: http.ServerResponse) => {
-    try {
-      let ctx = {
-        req,
-        res,
-        app: this
-      };
-      await this.entrance(ctx);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      res.end();
-    }
-  };
-
-  createServer() {
-    return http.createServer(this.callback);
-  }
-}
+export { ServerModel, Router, ServerModelContext };
